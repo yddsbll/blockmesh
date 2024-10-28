@@ -45,9 +45,8 @@ function install_before() {
     UBUNTU_VERSION=$(lsb_release -rs)
     REQUIRED_VERSION=22.04
 
-
-    if (( $(echo "UBUNTU_VERSION < $REQUIRED_VERSION" | bc -l) )); then
-        echo "此节点需要最低版本的 Ubuntu 22.04 "
+    if (( $(echo "$UBUNTU_VERSION < $REQUIRED_VERSION" | bc -l) )); then
+        echo "此节点需要最低版本的 Ubuntu 22.04"
         exit 1
     fi
 
@@ -79,7 +78,7 @@ function install_node() {
 
         # 输入登陆数据数据
         read -rp "请输入邮箱号:  " USER_EMAIL
-         read -rp "请输入密码:  " USER_PASSWORD
+        read -rp "请输入密码:  " USER_PASSWORD
 
         # 获取用户名称及其主目录
         USERNAME=$(whoami)
