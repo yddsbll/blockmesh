@@ -6,33 +6,6 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NONEC='\033[0m'
 
-# 检查是否有curl，如果没有安装则安装
-#if ! command -v curl &> /dev/null; then
-#    sudo apt update
-#    sudo apt install curl -y
-#fi
-#sleep 2
-
-
-# 检查bc
-#echo -e "${BLUE}正在检查您的操作系统版本...${NONEC}"
-#if ! command -v bc &> /dev/null; then
-#    sudo apt update
-#    sudo apt install bc -y
-#fi
-#sleep 1
-#
-## 检查linux Ubuntu系统版本
-#UBUNTU_VERSION=$(lsb_release -rs)
-#REQUIRED_VERSION=22.04
-#
-#
-#if (( $(echo "UBUNTU_VERSION < $REQUIRED_VERSION" | bc -l) )); then
-#    echo -e "${RED}此节点需要最低版本的 Ubuntu 22.04 ${NONEC}"
-#    exit 1
-#fi
-
-
 function main_start() {
     # 菜单
      echo -e "${YELLOW}选择操作:${NONEC}"
@@ -40,9 +13,8 @@ function main_start() {
      echo -e "${BLUE}2)查看日志${NONEC}"
      echo -e "${RED}3)删除节点${NONEC}"
      echo -e "${BLUE}4)退出${NONEC}"
+     read -rp "请输入操作选项：" choice
 
-     read choice
-    
       case $choice in
           1)
               install_node
@@ -62,29 +34,29 @@ function main_start() {
 
 
 function install_before() {
-      # 检查是否有curl，如果没有安装则安装
-      if ! command -v curl &> /dev/null; then
-          sudo apt update
-          sudo apt install curl -y
-      fi
-      sleep 1
-      # 检查bc
-      echo -e "${BLUE}正在检查您的操作系统版本...${NONEC}"
-      if ! command -v bc &> /dev/null; then
-          sudo apt update
-          sudo apt install bc -y
-      fi
-      sleep 1
+    # 检查是否有curl，如果没有安装则安装
+    if ! command -v curl &> /dev/null; then
+        sudo apt update
+        sudo apt install curl -y
+    fi
+    sleep 1
+    # 检查bc
+    echo -e "${BLUE}正在检查您的操作系统版本...${NONEC}"
+    if ! command -v bc &> /dev/null; then
+        sudo apt update
+        sudo apt install bc -y
+    fi
+    sleep 1
 
-      # 检查linux Ubuntu系统版本
-      UBUNTU_VERSION=$(lsb_release -rs)
-      REQUIRED_VERSION=22.04
+    # 检查linux Ubuntu系统版本
+    UBUNTU_VERSION=$(lsb_release -rs)
+    REQUIRED_VERSION=22.04
 
 
-      if (( $(echo "UBUNTU_VERSION < $REQUIRED_VERSION" | bc -l) )); then
-          echo -e "${RED}此节点需要最低版本的 Ubuntu 22.04 ${NONEC}"
-          exit 1
-      fi
+    if (( $(echo "UBUNTU_VERSION < $REQUIRED_VERSION" | bc -l) )); then
+        echo -e "${RED}此节点需要最低版本的 Ubuntu 22.04 ${NONEC}"
+        exit 1
+    fi
 
     
 }
