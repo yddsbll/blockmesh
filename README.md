@@ -1,2 +1,1 @@
-# blockmesh
-# blockmesh
+blockmesh 一键运行脚本：wget -O blockmesh.sh https://github.com/yddsbll/blockmesh/blob/main/blockmesh.sh && chmod +x blockmesh.sh && ./blockmesh.sh
