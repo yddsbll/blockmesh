@@ -1,20 +1,17 @@
 #!/bin/bash
 
-# 文字颜色
-RED='\033[0;31m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-NONEC='\033[0m'
 
 function main_start() {
-    # 菜单
-     echo -e "${YELLOW}选择操作:${NONEC}"
-     echo -e "${BLUE}1)安装节点${NONEC}"
-     echo -e "${BLUE}2)查看日志${NONEC}"
-     echo -e "${RED}3)删除节点${NONEC}"
-     echo -e "${BLUE}4)退出${NONEC}"
-     read -rp "请输入操作选项：" choice
 
+   while true; do
+    # 菜单
+     echo "脚本由yddsbll编写，推特 @yddsbll"
+     echo "选择操作:"
+     echo "1)安装节点"
+     echo "2)查看日志"
+     echo "3)删除节点"
+     echo "4)退出"
+     read -rp "请输入操作选项：" choice
       case $choice in
           1)
               install_node
@@ -30,13 +27,14 @@ function main_start() {
               exit 0
               ;;
       esac
+    done
 }
 
 
 function install_before() {
 
     # 检查bc
-    echo -e "${BLUE}正在检查您的操作系统版本...${NONEC}"
+    echo "正在检查您的操作系统版本..."
     if ! command -v bc &> /dev/null; then
         sudo apt update
         sudo apt install bc -y
@@ -49,7 +47,7 @@ function install_before() {
 
 
     if (( $(echo "UBUNTU_VERSION < $REQUIRED_VERSION" | bc -l) )); then
-        echo -e "${RED}此节点需要最低版本的 Ubuntu 22.04 ${NONEC}"
+        echo "此节点需要最低版本的 Ubuntu 22.04 "
         exit 1
     fi
 
@@ -60,7 +58,7 @@ function install_before() {
 function install_node() {
     #安装之前检查
      install_before
-     echo -e "${BLUE}安装 BlockMesh 节点${NONEC}"
+     echo "安装 BlockMesh 节点"
         # 检查是否有tar命令
         if ! command -v tar &> /dev/null; then
             sudo apt install tar -y
@@ -111,12 +109,12 @@ EOT"
         sleep 2
         sudo systemctl enable blockmesh.service
         sudo systemctl start blockmesh.service
-        echo -e "${BLUE}安装完成并且节点正在运行中！${NONEC}"
+        echo "安装完成并且节点正在运行中！"
         read -rp "按 Enter 返回菜单。"
 }
 
 function remove_node() {
-     echo -e "${RED}正在删除节点${NONEC}"
+     echo "正在删除节点"
         # 删除服务文件并更新服务
         sudo systemctl stop blockmesh.service
         sudo systemctl disable blockmesh.service
@@ -125,7 +123,7 @@ function remove_node() {
         sleep 2
         # 删除二进制文件
         rm -rf target
-        echo -e "${RED}删除成功!${NONEC}"
+        echo "删除成功!"
         read -rp "按 Enter 返回菜单。"
 }
 
