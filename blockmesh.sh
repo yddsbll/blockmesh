@@ -34,12 +34,7 @@ function main_start() {
 
 
 function install_before() {
-    # 检查是否有curl，如果没有安装则安装
-    if ! command -v curl &> /dev/null; then
-        sudo apt update
-        sudo apt install curl -y
-    fi
-    sleep 1
+
     # 检查bc
     echo -e "${BLUE}正在检查您的操作系统版本...${NONEC}"
     if ! command -v bc &> /dev/null; then
@@ -85,11 +80,8 @@ function install_node() {
         cd target/release
 
         # 输入登陆数据数据
-        echo -e "${BLUE}输入邮箱号:${NONEC}"
-        read USER_EMAIL
-
-        echo -e "${BLUE}输入密码(密码不明文显示):${NONEC}"
-        read -s USER_PASSWORD
+        read -rp "请输入邮箱号:  " USER_EMAIL
+         read -rp "请输入邮箱号:  " USER_PASSWORD
 
         # 获取用户名称及其主目录
         USERNAME=$(whoami)
