@@ -79,7 +79,7 @@ function install_node() {
 
         # 输入登陆数据数据
         read -rp "请输入邮箱号:  " USER_EMAIL
-         read -rp "请输入邮箱号:  " USER_PASSWORD
+         read -rp "请输入密码:  " USER_PASSWORD
 
         # 获取用户名称及其主目录
         USERNAME=$(whoami)
@@ -106,7 +106,7 @@ WantedBy=multi-user.target
 EOT"
         # 更新服务并启用
         sudo systemctl daemon-reload
-        sleep 2
+        sleep 1
         sudo systemctl enable blockmesh.service
         sudo systemctl start blockmesh.service
         echo "安装完成并且节点正在运行中！"
@@ -120,7 +120,7 @@ function remove_node() {
         sudo systemctl disable blockmesh.service
         sudo rm /etc/systemd/system/blockmesh.service
         sudo systemctl daemon-reload
-        sleep 2
+        sleep 1
         # 删除二进制文件
         rm -rf target
         echo "删除成功!"
