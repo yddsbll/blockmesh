@@ -139,8 +139,8 @@ function remove_node() {
 }
 
 function upgrade_node() {
-  remove_node();
-  install_node();
+  remove_node;
+  install_node;
 }
 
 function cat_logs() {
