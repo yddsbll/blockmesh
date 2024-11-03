@@ -88,6 +88,9 @@ function install_node() {
         # 进入目录
         cd target/x86_64-unknown-linux-gnu/release
 
+        mv blockmesh-cli ..
+        cd ..
+
         # 输入登陆数据数据
         read -rp "请输入邮箱号:  " USER_EMAIL
         read -rp "请输入密码:  " USER_PASSWORD
