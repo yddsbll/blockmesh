@@ -27,6 +27,7 @@ function main_start() {
               ;;
           4)
               remove_node
+              read -rp "按 Enter 返回菜单。"
               ;;
           5)
               exit 0
@@ -138,7 +139,7 @@ function remove_node() {
         # 删除二进制文件
         rm -rf target
         echo "删除成功!"
-        read -rp "按 Enter 返回菜单。"
+
 }
 
 function upgrade_node() {
