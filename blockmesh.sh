@@ -89,8 +89,8 @@ function install_node() {
         # 进入目录
         cd target/x86_64-unknown-linux-gnu/release
 
-        mv blockmesh-cli ..
-        cd ..
+#        mv blockmesh-cli ..
+#        cd ..
 
         # 输入登陆数据数据
         read -rp "请输入邮箱号:  " USER_EMAIL
@@ -112,7 +112,7 @@ After=network.target
 
 [Service]
 User=$USERNAME
-ExecStart=$HOME_DIR/target/release/blockmesh-cli login --email $USER_EMAIL --password $USER_PASSWORD
+ExecStart=$HOME_DIR/target/x86_64-unknown-linux-gnu/release/blockmesh-cli login --email $USER_EMAIL --password $USER_PASSWORD
 WorkingDirectory=$HOME_DIR/target/release
 Restart=on-failure
 
