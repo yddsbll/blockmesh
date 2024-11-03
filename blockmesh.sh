@@ -9,8 +9,9 @@ function main_start() {
      echo "选择操作:"
      echo "1)安装节点"
      echo "2)查看日志"
-     echo "3)删除节点"
-     echo "4)退出"
+     echo "3)升级节点"
+     echo "4)删除节点"
+     echo "5)退出"
      read -rp "请输入操作选项：" choice
       case $choice in
           1)
@@ -21,14 +22,23 @@ function main_start() {
               cat_logs
               ;;
           3)
-              remove_node
+              # 升级节点
+              upgrade_node
               ;;
           4)
+              remove_node
+              ;;
+          5)
               exit 0
               ;;
       esac
     done
 }
+
+
+
+
+
 
 
 function install_before() {
@@ -126,6 +136,11 @@ function remove_node() {
         rm -rf target
         echo "删除成功!"
         read -rp "按 Enter 返回菜单。"
+}
+
+function upgrade_node() {
+  remove_node();
+  install_node();
 }
 
 function cat_logs() {
