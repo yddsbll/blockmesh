@@ -65,7 +65,9 @@ function install_node() {
         sleep 1
 
         # 下载 BlockMesh 二进制文件
-        wget https://github.com/block-mesh/block-mesh-monorepo/releases/download/v0.0.316/blockmesh-cli-x86_64-unknown-linux-gnu.tar.gz
+#        wget https://github.com/block-mesh/block-mesh-monorepo/releases/download/v0.0.316/blockmesh-cli-x86_64-unknown-linux-gnu.tar.gz
+        wget https://github.com/block-mesh/block-mesh-monorepo/releases/download/v0.0.331/blockmesh-cli-x86_64-unknown-linux-gnu.tar.gz
+
         # 解压文件
         tar -xzvf blockmesh-cli-x86_64-unknown-linux-gnu.tar.gz
         sleep 1
@@ -74,7 +76,7 @@ function install_node() {
         rm blockmesh-cli-x86_64-unknown-linux-gnu.tar.gz
 
         # 进入目录
-        cd target/release
+        cd target/x86_64-unknown-linux-gnu/release
 
         # 输入登陆数据数据
         read -rp "请输入邮箱号:  " USER_EMAIL
