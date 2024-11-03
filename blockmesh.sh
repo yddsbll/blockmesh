@@ -105,26 +105,28 @@ function install_node() {
             HOME_DIR="/home/$USERNAME"
         fi
         # 使用当前用户的用户名和主目录创建或更新服务文件
-        sudo bash -c "cat <<EOT > /etc/systemd/system/blockmesh.service
-[Unit]
-Description=BlockMesh CLI Service
-After=network.target
+#        sudo bash -c "cat <<EOT > /etc/systemd/system/blockmesh.service
+#[Unit]
+#Description=BlockMesh CLI Service
+#After=network.target
+#
+#[Service]
+#User=$USERNAME
+#ExecStart=$HOME_DIR/target/x86_64-unknown-linux-gnu/release/blockmesh-cli login --email $USER_EMAIL --password $USER_PASSWORD
+#WorkingDirectory=$HOME_DIR/target/release
+#Restart=on-failure
+#
+#[Install]
+#WantedBy=multi-user.target
+#EOT"
+#        # 更新服务并启用
+#        sudo systemctl daemon-reload
+#        sleep 1
+#        sudo systemctl enable blockmesh.service
+#        sudo systemctl start blockmesh.service
 
-[Service]
-User=$USERNAME
-ExecStart=$HOME_DIR/target/x86_64-unknown-linux-gnu/release/blockmesh-cli login --email $USER_EMAIL --password $USER_PASSWORD
-WorkingDirectory=$HOME_DIR/target/release
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-EOT"
-        # 更新服务并启用
-        sudo systemctl daemon-reload
-        sleep 1
-        sudo systemctl enable blockmesh.service
-        sudo systemctl start blockmesh.service
-        echo "安装完成并且节点正在运行中！"
+        nohup blockmesh-cli login --email $USER_EMAIL --password $USER_PASSWORD > blockmesh.log 2>&1 &
+        echo "安装完成并且节点正在运行中！查看日志: tail -f ~/target/x86_64-unknown-linux-gnu/release/blockmesh.log "
         read -rp "按 Enter 返回菜单。"
 }
 
@@ -148,7 +150,7 @@ function upgrade_node() {
 }
 
 function cat_logs() {
-    sudo journalctl -u blockmesh.service -f
+    tail -f ~/target/x86_64-unknown-linux-gnu/release/blockmesh.log
     echo "按 Ctrl+C 退出日志查看。"
 }
 
